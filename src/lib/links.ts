@@ -17,7 +17,7 @@ export const CONTACT_EMAIL = "campaign@example.org";
  * Placeholder — replace with the production domain once the site is live.
  * Used by share drafts; treated as a token to be edited before posting.
  */
-export const CAMPAIGN_URL = "[campaign URL pending]";
+export const CAMPAIGN_URL = "https://voice4igbal.vercel.app/";
 
 export const HASHTAGS = [
   "#FreeIgbalAbilov",
@@ -41,7 +41,7 @@ export const LAST_UPDATED = "May 2026";
  * Placeholder — used by sitemap.ts, robots.ts, and Open Graph metadata.
  * Replace with the production domain (e.g. "https://freeigbalabilov.org").
  */
-export const SITE_URL = "https://example.com";
+export const SITE_URL = "https://voice4igbal.vercel.app/";
 
 /** True when a placeholder hasn't been replaced yet — useful for UI hints. */
 export const isPlaceholderUrl = (value: string) =>
