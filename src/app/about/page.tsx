@@ -47,6 +47,13 @@ export default function AboutPage() {
             body: "Behind every case file is a human being with a life that continues even when the news cycle moves on.",
           },
         ]}
+        illustration={{
+          src: "/images/illustration-books-glasses.png",
+          alt: "A flat illustration of a stack of books with reading glasses resting on top — the quiet work of a scholar.",
+          caption: "Plate — The scholar",
+          captionRight: "His daily work",
+        }}
+        accent="ember"
       />
 
       <SectionBlock
@@ -62,6 +69,13 @@ export default function AboutPage() {
           text: "We would rather be honest about what we don’t know than fill the gaps with guesses.",
           attribution: "Editorial principle",
         }}
+        illustration={{
+          src: "/images/illustration-empty-chair.png",
+          alt: "A flat illustration of an empty wooden chair tucked under a desk with an open notebook and pen — the researcher's seat, unoccupied.",
+          caption: "Plate — The absence",
+          captionRight: "What is missing",
+        }}
+        accent="crimson"
       />
 
       <SectionBlock
@@ -86,6 +100,13 @@ export default function AboutPage() {
         paragraphs={[
           "Public attention is one of the few tools that consistently changes outcomes in cases like this. That’s why this campaign exists, and why it’s asking for yours.",
         ]}
+        illustration={{
+          src: "/images/illustration-solidarity.png",
+          alt: "A flat illustration of three figures standing shoulder to shoulder — researchers, readers, and ordinary people in solidarity.",
+          caption: "Plate — Solidarity",
+          captionRight: "Why it matters",
+        }}
+        accent="moss"
       />
 
       <BroaderConcerns />

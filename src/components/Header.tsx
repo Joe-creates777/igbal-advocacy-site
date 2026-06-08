@@ -14,17 +14,9 @@ const navLinks = [
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -40,48 +32,43 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header
-      className={`sticky top-0 z-40 transition-[background-color,border-color,backdrop-filter] duration-300 ease-editorial ${
-        scrolled
-          ? "border-b border-ink/10 bg-paper/85 backdrop-blur supports-[backdrop-filter]:bg-paper/70"
-          : "border-b border-transparent bg-paper/0"
-      }`}
-    >
-      <div className="container-page flex h-16 items-center justify-between md:h-20">
+    <header className="sticky top-0 z-40 border-b border-ink-700 bg-ink text-paper">
+      <div className="container-page flex h-16 items-center justify-between md:h-[68px]">
+        {/* Wordmark */}
         <Link
           href="/"
-          className="group flex items-center gap-2.5 rounded-full p-1 -ml-1 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/30"
+          className="group inline-flex items-baseline gap-2 rounded-none focus:outline-none focus-visible:ring-2 focus-visible:ring-paper/40"
           aria-label="Free Igbal Abilov — home"
         >
-          <span
-            aria-hidden
-            className="relative inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-ember text-[10px] font-bold uppercase tracking-wider text-white shadow-[0_0_0_2px_rgba(215,64,43,0.15)] transition duration-300 group-hover:shadow-[0_0_0_5px_rgba(215,64,43,0.18)]"
-          >
-            <span className="relative">FI</span>
+          <span className="font-serif text-[18px] font-semibold uppercase tracking-[0.22em] text-paper md:text-[19px]">
+            Free
           </span>
-          <span className="text-sm font-semibold tracking-tightish text-ink">
-            Free Igbal Abilov
+          <span className="font-serif text-[18px] font-semibold uppercase tracking-[0.22em] text-ember md:text-[19px]">
+            Igbal
           </span>
         </Link>
 
+        {/* Primary nav */}
         <nav className="hidden md:block" aria-label="Primary">
-          <ul className="flex items-center gap-7 text-sm">
+          <ul className="flex items-center gap-8 text-[12px] font-semibold uppercase tracking-[0.22em]">
             {navLinks.map((link) => {
               const active = isActive(link.href);
               return (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`group relative inline-flex items-center py-1 font-medium transition-colors duration-200 ${
-                      active ? "text-ink" : "text-ink/70 hover:text-ink"
+                    className={`relative inline-flex items-center py-2 transition-colors duration-200 ${
+                      active
+                        ? "text-paper"
+                        : "text-paper/65 hover:text-paper"
                     }`}
                     aria-current={active ? "page" : undefined}
                   >
                     {link.label}
                     <span
                       aria-hidden
-                      className={`pointer-events-none absolute -bottom-0.5 left-1/2 h-[2px] -translate-x-1/2 rounded-full bg-ember transition-all duration-300 ease-editorial ${
-                        active ? "w-5" : "w-0 group-hover:w-3"
+                      className={`pointer-events-none absolute -bottom-px left-0 h-px bg-paper transition-all duration-300 ease-editorial ${
+                        active ? "w-full" : "w-0"
                       }`}
                     />
                   </Link>
@@ -91,15 +78,17 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="hidden md:block">
+        {/* Right: socials + petition link */}
+        <div className="hidden items-center gap-6 md:flex">
+          <SocialLinks variant="dark" />
           <Link
             href="/take-action"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-ember px-5 py-2.5 text-[13px] font-semibold text-white shadow-sm transition duration-200 ease-out hover:-translate-y-px hover:bg-ember-600 hover:shadow-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+            className="inline-flex items-center gap-2 border-l border-paper/20 pl-6 text-[11px] font-semibold uppercase tracking-[0.22em] text-paper/85 transition-colors duration-200 hover:text-paper"
           >
-            Sign the Petition
+            Sign the petition
             <svg
               aria-hidden
-              className="h-3.5 w-3.5"
+              className="h-3 w-3"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -113,9 +102,10 @@ export default function Header() {
           </Link>
         </div>
 
+        {/* Mobile menu trigger */}
         <button
           type="button"
-          className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink transition hover:border-ink/35 hover:bg-ink/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/30"
+          className="md:hidden inline-flex h-10 w-10 items-center justify-center border border-paper/30 text-paper transition hover:border-paper/70 hover:bg-paper/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-paper/40"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-nav"
@@ -147,9 +137,10 @@ export default function Header() {
         </button>
       </div>
 
+      {/* Mobile drawer */}
       <div
         id="mobile-nav"
-        className={`md:hidden grid overflow-hidden border-ink/10 bg-paper transition-[grid-template-rows,border-color] duration-300 ease-editorial ${
+        className={`md:hidden grid overflow-hidden border-paper/15 bg-ink transition-[grid-template-rows,border-color] duration-300 ease-editorial ${
           open
             ? "grid-rows-[1fr] border-t"
             : "grid-rows-[0fr] border-transparent"
@@ -157,22 +148,22 @@ export default function Header() {
       >
         <div className="min-h-0 overflow-hidden">
           <nav aria-label="Mobile" className="container-page py-4">
-            <ul className="flex flex-col divide-y divide-ink/10">
+            <ul className="flex flex-col divide-y divide-paper/15">
               {navLinks.map((link) => {
                 const active = isActive(link.href);
                 return (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className={`flex items-center justify-between py-4 text-base font-medium transition ${
-                        active ? "text-ember" : "text-ink"
+                      className={`flex items-center justify-between py-4 text-[13px] font-semibold uppercase tracking-[0.22em] transition ${
+                        active ? "text-ember" : "text-paper"
                       }`}
                       aria-current={active ? "page" : undefined}
                     >
                       {link.label}
                       <svg
                         aria-hidden
-                        className="h-4 w-4 text-ink/40"
+                        className="h-4 w-4 text-paper/50"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -189,14 +180,16 @@ export default function Header() {
               })}
             </ul>
             <div className="pt-4">
-              <Link href="/take-action" className="btn-primary w-full">
-                Sign the Petition
+              <Link href="/take-action" className="btn-on-dark w-full">
+                Sign the petition
               </Link>
             </div>
 
-            <div className="mt-6 flex items-center justify-between gap-3 border-t border-ink/10 pt-5">
-              <p className="eyebrow">Follow</p>
-              <SocialLinks variant="light" />
+            <div className="mt-6 flex items-center justify-between gap-3 border-t border-paper/15 pt-5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-paper/55">
+                Follow
+              </p>
+              <SocialLinks variant="dark" />
             </div>
           </nav>
         </div>

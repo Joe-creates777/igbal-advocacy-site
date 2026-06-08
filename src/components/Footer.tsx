@@ -5,58 +5,51 @@ const navLinks = [
   { href: "/about", label: "About the Case" },
   { href: "/blog", label: "Blog" },
   { href: "/take-action", label: "Take Action" },
+  { href: "/resources", label: "Resources" },
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-24 overflow-hidden border-t border-ink/10 bg-ink text-paper">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-32 -top-24 h-64 w-64 rounded-full bg-ember/10 blur-3xl"
-      />
-
-      <div className="container-page relative grid gap-12 py-16 md:grid-cols-12 md:py-20">
+    <footer className="relative mt-24 border-t border-ink-700 bg-ink text-paper">
+      <div className="container-page relative z-10 grid gap-12 py-16 md:grid-cols-12 md:py-20">
         <div className="space-y-5 md:col-span-5">
           <Link
             href="/"
-            className="inline-flex items-center gap-2.5 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-paper/30 rounded-full"
+            className="inline-flex items-baseline gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-paper/30"
           >
-            <span
-              aria-hidden
-              className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-ember text-[10px] font-bold uppercase tracking-wider text-white"
-            >
-              FI
+            <span className="font-serif text-[20px] font-semibold uppercase tracking-[0.22em] text-paper">
+              Free
             </span>
-            <span className="text-sm font-semibold tracking-tightish">
-              Free Igbal Abilov
+            <span className="font-serif text-[20px] font-semibold uppercase tracking-[0.22em] text-ember">
+              Igbal
             </span>
           </Link>
-          <p className="max-w-sm text-sm leading-[1.65] text-paper/65">
+          <p className="max-w-sm text-[14px] leading-[1.7] text-paper/70">
             An independent advocacy campaign for academic freedom and human
             rights. Built — and maintained — by students who believe public
             attention matters.
           </p>
 
           <div className="pt-2">
-            <p className="eyebrow text-ember">Follow the campaign</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-paper/55">
+              Follow the campaign
+            </p>
             <SocialLinks variant="dark" className="mt-3" />
           </div>
         </div>
 
         <div className="md:col-span-3">
-          <p className="eyebrow text-ember">Explore</p>
-          <ul className="mt-4 space-y-2.5 text-sm">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-paper/55">
+            Explore
+          </p>
+          <ul className="mt-4 space-y-2.5 text-[13px] font-semibold uppercase tracking-[0.18em]">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-paper/80 transition-colors duration-200 hover:text-white"
+                  className="text-paper/80 transition-colors duration-200 hover:text-paper"
                 >
                   {link.label}
                 </Link>
@@ -66,12 +59,14 @@ export default function Footer() {
         </div>
 
         <div className="md:col-span-4">
-          <p className="eyebrow text-ember">Take action</p>
-          <ul className="mt-4 space-y-2.5 text-sm">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-paper/55">
+            Take action
+          </p>
+          <ul className="mt-4 space-y-2.5 text-[13px] font-semibold uppercase tracking-[0.18em]">
             <li>
               <Link
                 href="/take-action"
-                className="text-paper/80 transition-colors duration-200 hover:text-white"
+                className="text-paper/80 transition-colors duration-200 hover:text-paper"
               >
                 Sign the petition
               </Link>
@@ -79,7 +74,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/take-action#share"
-                className="text-paper/80 transition-colors duration-200 hover:text-white"
+                className="text-paper/80 transition-colors duration-200 hover:text-paper"
               >
                 Share the campaign
               </Link>
@@ -87,7 +82,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/blog"
-                className="text-paper/80 transition-colors duration-200 hover:text-white"
+                className="text-paper/80 transition-colors duration-200 hover:text-paper"
               >
                 Stay informed
               </Link>
@@ -96,10 +91,10 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-white/10">
-        <div className="container-page flex flex-col gap-2 py-6 text-xs text-paper/55 md:flex-row md:items-center md:justify-between">
-          <p>&copy; {year} Free Igbal Abilov campaign. All rights reserved.</p>
-          <p>Built for academic freedom and human rights.</p>
+      <div className="relative z-10 border-t border-paper/10">
+        <div className="container-page flex flex-col gap-2 py-6 text-[11px] uppercase tracking-[0.22em] text-paper/50 md:flex-row md:items-center md:justify-between">
+          <p>&copy; {year} Free Igbal campaign</p>
+          <p>Built for academic freedom and human rights</p>
         </div>
       </div>
     </footer>

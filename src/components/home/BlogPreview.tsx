@@ -9,31 +9,38 @@ export default function BlogPreview() {
     <section
       id="blog-preview"
       aria-labelledby="blog-preview-heading"
-      className="border-y border-ink/10 surface-muted"
+      className="bg-paper"
     >
       <div className="container-page section">
-        <header className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <header className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-12">
           <div className="max-w-2xl">
-            <p className="eyebrow">From the blog</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-ember">
+              From the blog
+            </p>
             <h2
               id="blog-preview-heading"
-              className="mt-3 font-serif text-3xl font-semibold leading-[1.1] tracking-[-0.018em] text-ink md:text-5xl"
+              className="mt-5 font-serif font-semibold leading-[0.98] tracking-[-0.025em] text-ink text-4xl md:text-6xl lg:text-[4.5rem]"
             >
-              Read. Think. Then act.
+              Read.
+              <br />
+              Think.
+              <br />
+              <span className="text-ember">Then act.</span>
             </h2>
-            <p className="mt-5 text-base leading-[1.65] text-ink/70 md:text-lg">
+            <span aria-hidden className="mt-8 block h-px w-20 bg-ember" />
+            <p className="mt-7 max-w-xl text-[15px] leading-[1.7] text-ink/75 md:text-base">
               Stories, explainers, and updates connecting Igbal&rsquo;s case to
               a wider conversation about freedom, knowledge, and power.
             </p>
           </div>
           <Link
             href="/blog"
-            className="link-underline inline-flex items-center gap-2 text-sm font-semibold text-ink"
+            className="inline-flex items-center gap-3 self-start border-b border-ink pb-1 text-[12px] font-semibold uppercase tracking-[0.24em] text-ink transition-colors hover:text-ember hover:border-ember md:self-end"
           >
             View all posts
             <svg
               aria-hidden
-              className="h-4 w-4"
+              className="h-3.5 w-3.5"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"

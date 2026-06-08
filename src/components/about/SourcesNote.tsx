@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { LAST_UPDATED } from "@/lib/links";
 
 export default function SourcesNote() {
@@ -5,29 +6,38 @@ export default function SourcesNote() {
     <section className="container-page section-tight">
       <aside
         aria-labelledby="sources-note-heading"
-        className="relative overflow-hidden rounded-3xl border border-ember/25 bg-gradient-to-br from-ember-50/70 via-paper to-paper p-8 shadow-card md:p-12"
+        className="relative overflow-hidden border border-moss-100 bg-moss-50/60 p-8 md:p-12"
       >
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-ember/15 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ember/30 to-transparent"
-        />
         <div className="relative grid gap-10 md:grid-cols-12">
           <div className="md:col-span-4">
-            <p className="eyebrow">A note on sources</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-moss-600">
+              A note on sources
+            </p>
             <h2
               id="sources-note-heading"
               className="mt-3 font-serif text-2xl font-semibold leading-[1.15] tracking-[-0.018em] text-ink md:text-[1.875rem]"
             >
               How we handle facts.
             </h2>
-            <p className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/55">
-              <span aria-hidden className="h-1 w-1 rounded-full bg-ember" />
+            <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-moss-600">
               Last updated: {LAST_UPDATED}
             </p>
+
+            <figure className="mt-8 border border-moss-100 bg-paper">
+              <div className="relative aspect-[3/2] w-full">
+                <Image
+                  src="/images/illustration-magnifier.png"
+                  alt="A flat illustration of a magnifying glass held over a handwritten page — careful verification."
+                  fill
+                  sizes="(min-width: 768px) 30vw, 100vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <figcaption className="flex items-center justify-between gap-3 border-t border-moss-100 bg-paper-50 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-ink/65">
+                <span>Plate — Verify</span>
+                <span>Line by line</span>
+              </figcaption>
+            </figure>
           </div>
 
           <div className="md:col-span-8">
@@ -58,10 +68,11 @@ export default function SourcesNote() {
                   <strong className="font-semibold text-ink">
                     Claims update as facts are verified.
                   </strong>{" "}
-                  Where details are still being confirmed, you&rsquo;ll see
-                  cautious placeholder language. We&rsquo;d rather be honest
-                  about uncertainty than guess — and we&rsquo;ll update as
-                  more information is publicly verified.
+                  Where exact dates aren&rsquo;t yet publicly verifiable, we
+                  use general timeframes — <em>recent reports</em>,{" "}
+                  <em>ongoing</em>, <em>now</em>. We&rsquo;d rather be honest
+                  about uncertainty than guess, and we update as more
+                  information is publicly confirmed.
                 </span>
               </li>
               <li className="flex gap-4">
@@ -86,7 +97,7 @@ function Marker({ children }: { children: React.ReactNode }) {
   return (
     <span
       aria-hidden
-      className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-ember text-[11px] font-semibold text-white shadow-[0_4px_12px_-4px_rgba(215,64,43,0.5)]"
+      className="grid h-6 w-6 shrink-0 place-items-center rounded-none border border-ink bg-ink text-[11px] font-semibold text-paper"
     >
       {children}
     </span>

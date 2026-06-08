@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { CAMPAIGN_URL, HASHTAGS } from "@/lib/links";
 import CopyButton from "./CopyButton";
 
@@ -114,22 +115,49 @@ export default function ShareGuide() {
       className="border-y border-ink/10 surface-muted scroll-mt-24"
     >
       <div className="container-page section">
-        <header className="max-w-2xl">
-          <p className="eyebrow">Share the campaign</p>
-          <h2
-            id="share-heading"
-            className="mt-3 font-serif text-3xl font-semibold leading-[1.1] tracking-[-0.018em] text-ink md:text-5xl"
-          >
-            Copy. Paste. Send.
-          </h2>
-          <p className="mt-5 text-base leading-[1.65] text-ink/70 md:text-lg">
-            Drafted for you. Edit freely — or use them word-for-word. Replace{" "}
-            <code className="rounded bg-ink/[0.06] px-1.5 py-0.5 font-sans text-[13px] text-ink/80">
-              {CAMPAIGN_URL}
-            </code>{" "}
-            with the live campaign link before posting.
-          </p>
-        </header>
+        <div className="grid items-end gap-10 md:grid-cols-12 md:gap-12">
+          <header className="md:col-span-7">
+            <div className="flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.28em]">
+              <span className="text-moss-600">Toolkit for Action 04</span>
+              <span aria-hidden className="h-px w-10 bg-ink/20" />
+              <span className="text-ink/55">Drafted for you</span>
+            </div>
+            <h2
+              id="share-heading"
+              className="mt-5 font-serif text-3xl font-semibold leading-[1.05] tracking-[-0.022em] text-ink md:text-5xl lg:text-[3.5rem]"
+            >
+              Copy. Paste. Send.
+            </h2>
+            <span aria-hidden className="mt-7 block h-px w-20 bg-moss-600" />
+            <p className="mt-7 max-w-xl text-[15px] leading-[1.7] text-ink/75 md:text-base">
+              If you&rsquo;d rather post in your own voice than share the
+              Linktree, here are short, ready-made messages. Edit freely — or
+              send them word-for-word. Replace{" "}
+              <code className="rounded bg-ink/[0.06] px-1.5 py-0.5 font-sans text-[13px] text-ink/80">
+                {CAMPAIGN_URL}
+              </code>{" "}
+              with the live campaign link before posting.
+            </p>
+          </header>
+
+          <aside className="md:col-span-5">
+            <figure className="relative border border-paper-300 bg-paper">
+              <div className="relative aspect-[3/2] w-full">
+                <Image
+                  src="/images/illustration-sealed-letter.png"
+                  alt="A flat illustration of a sealed letter ready to be sent — the campaign, in your words."
+                  fill
+                  sizes="(min-width: 768px) 40vw, 100vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <figcaption className="flex items-center justify-between gap-3 border-t border-paper-300 bg-paper-50 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-ink/65">
+                <span>Plate — Send it</span>
+                <span>One share at a time</span>
+              </figcaption>
+            </figure>
+          </aside>
+        </div>
 
         <ul className="mt-14 grid gap-6 md:mt-16 lg:grid-cols-3">
           {channels.map((channel) => (
@@ -156,7 +184,7 @@ export default function ShareGuide() {
               </p>
 
               {channel.subject && (
-                <div className="mt-5 rounded-xl border border-ink/10 bg-white/70 p-4">
+                <div className="mt-5 border border-paper-300 bg-paper-50 p-4">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/55">
                     Subject
                   </p>
@@ -166,7 +194,7 @@ export default function ShareGuide() {
                 </div>
               )}
 
-              <div className="mt-3 flex flex-1 flex-col rounded-xl border border-ink/10 bg-white/70 p-4">
+              <div className="mt-3 flex flex-1 flex-col border border-paper-300 bg-paper-50 p-4">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/55">
                   Message
                 </p>

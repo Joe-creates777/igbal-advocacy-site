@@ -5,31 +5,67 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Off-white editorial background
+        // Paper / archival beige background system
         paper: {
-          DEFAULT: "#F8F5F0",
-          50: "#FBF9F5",
-          100: "#F8F5F0",
-          200: "#EFEAE1",
+          DEFAULT: "#E8E4D8",
+          50: "#F4F1E8", // light archival paper
+          100: "#E8E4D8",
+          200: "#DCD6C5",
+          300: "#CFC8B9", // border
         },
-        // Deep navy/charcoal for body text + dark surfaces
+        // Editorial ink (true near-black, used everywhere instead of navy)
         ink: {
-          DEFAULT: "#11182B",
-          50: "#E6E8EE",
-          100: "#C5CAD6",
-          400: "#3A4259",
-          600: "#1B2238",
-          700: "#11182B",
-          900: "#070B17",
+          DEFAULT: "#111111",
+          50: "#E6E5E2",
+          100: "#C9C7C2",
+          400: "#3D3D3D",
+          500: "#2F2F2F",
+          600: "#262626", // soft black (hover / surfaces)
+          700: "#1A1A1A",
+          900: "#0A0A0A",
         },
-        // Warm campaign accent (red-orange)
+        // Muted gray for secondary copy
+        mute: {
+          DEFAULT: "#6B6B6B",
+          400: "#8A8A8A",
+          500: "#6B6B6B",
+          600: "#525252",
+        },
+        // Archival brown accent (replaces the old red-orange "ember")
         ember: {
-          DEFAULT: "#D7402B",
-          50: "#FCEAE6",
-          100: "#F7C7BD",
-          500: "#D7402B",
-          600: "#B82F1C",
-          700: "#921F11",
+          DEFAULT: "#7A6754",
+          50: "#EFEAE1",
+          100: "#D8CFBE",
+          500: "#7A6754",
+          600: "#5F5141",
+          700: "#463A2E",
+        },
+        // Warm rust / clay — drawn from the megaphone bell
+        clay: {
+          DEFAULT: "#B85C38",
+          50: "#F4E0D5",
+          100: "#E8C0AC",
+          500: "#B85C38",
+          600: "#92482C",
+          700: "#6E3621",
+        },
+        // Sage / olive green — drawn from the university pediment
+        moss: {
+          DEFAULT: "#6F7958",
+          50: "#E6E8DD",
+          100: "#C8CCB7",
+          500: "#6F7958",
+          600: "#565F45",
+          700: "#3F4632",
+        },
+        // Deep wine / wax-seal red — for serious advocacy accents
+        crimson: {
+          DEFAULT: "#7E2C2C",
+          50: "#F1DADA",
+          100: "#DDA9A9",
+          500: "#7E2C2C",
+          600: "#5F2121",
+          700: "#421717",
         },
       },
       fontFamily: {
@@ -42,13 +78,14 @@ const config: Config = {
       },
       letterSpacing: {
         tightish: "-0.015em",
+        wider2: "0.22em",
       },
       boxShadow: {
-        card: "0 1px 2px rgba(17, 24, 43, 0.04), 0 8px 30px -8px rgba(17, 24, 43, 0.08)",
+        card: "0 1px 2px rgba(17, 17, 17, 0.04), 0 6px 24px -10px rgba(17, 17, 17, 0.10)",
         "card-hover":
-          "0 1px 2px rgba(17, 24, 43, 0.05), 0 18px 44px -16px rgba(17, 24, 43, 0.18)",
-        glow: "0 10px 28px -10px rgba(215, 64, 43, 0.55)",
-        "ember-ring": "0 0 0 1px rgba(215, 64, 43, 0.2)",
+          "0 1px 2px rgba(17, 17, 17, 0.06), 0 16px 40px -18px rgba(17, 17, 17, 0.22)",
+        glow: "0 10px 28px -14px rgba(17, 17, 17, 0.55)",
+        "ember-ring": "0 0 0 1px rgba(122, 103, 84, 0.25)",
       },
       transitionTimingFunction: {
         editorial: "cubic-bezier(0.22, 1, 0.36, 1)",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -8,6 +9,31 @@ import PostMeta from "@/components/blog/PostMeta";
 import Prose from "@/components/blog/Prose";
 import { posts } from "@/content/posts";
 import { getPostBySlug, getRelatedPosts } from "@/lib/posts";
+
+const categoryArtwork: Record<string, { src: string; alt: string; caption: string }> = {
+  Essay: {
+    src: "/images/illustration-open-book.png",
+    alt: "A flat illustration of an open hardbound book and a fountain pen — the essay.",
+    caption: "Plate — Essay",
+  },
+  Explainer: {
+    src: "/images/illustration-books-glasses.png",
+    alt: "A flat illustration of a stack of books with reading glasses on top — the explainer.",
+    caption: "Plate — Explainer",
+  },
+  Action: {
+    src: "/images/illustration-megaphone.png",
+    alt: "A flat illustration of a megaphone with sound waves — a call to action.",
+    caption: "Plate — Action",
+  },
+  Timeline: {
+    src: "/images/illustration-sealed-letter.png",
+    alt: "A flat illustration of a sealed letter and a fountain pen — the case file, documented day by day.",
+    caption: "Plate — The record",
+  },
+};
+
+const defaultArtwork = categoryArtwork.Essay;
 
 type Params = { slug: string };
 
@@ -53,6 +79,15 @@ export default async function BlogArticlePage({
   if (!post) notFound();
 
   const related = getRelatedPosts(slug, 2);
+  // Prefer the per-post illustration when set; fall back to the category plate.
+  const fallback = categoryArtwork[post.category] ?? defaultArtwork;
+  const artwork = post.image
+    ? {
+        src: post.image.src,
+        alt: post.image.alt,
+        caption: post.image.caption ?? fallback.caption,
+      }
+    : fallback;
 
   return (
     <article>
@@ -100,6 +135,25 @@ export default async function BlogArticlePage({
           />
         </div>
       </header>
+
+      <div className="container-page mt-10 md:mt-14">
+        <figure className="mx-auto max-w-4xl border border-paper-300 bg-paper">
+          <div className="relative aspect-[16/8] w-full overflow-hidden">
+            <Image
+              src={artwork.src}
+              alt={artwork.alt}
+              fill
+              sizes="(min-width: 1024px) 960px, 100vw"
+              className="object-cover object-center"
+              priority
+            />
+          </div>
+          <figcaption className="flex items-center justify-between gap-3 border-t border-paper-300 bg-paper-50 px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-ink/65">
+            <span>{artwork.caption}</span>
+            <span>{post.category}</span>
+          </figcaption>
+        </figure>
+      </div>
 
       <div className="container-page mt-12 md:mt-16">
         <div className="max-w-prose">

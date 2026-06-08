@@ -1,12 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CONTACT_EMAIL } from "@/lib/links";
 
 export default function ContactBlock() {
   return (
     <section className="container-page section">
-      <div className="grid gap-10 rounded-3xl border border-ink/10 bg-white/70 p-8 shadow-card md:grid-cols-12 md:p-12">
+      <div className="grid gap-10 border border-moss-100 bg-moss-50/60 p-8 md:grid-cols-12 md:p-12">
         <header className="md:col-span-5">
-          <p className="eyebrow">Get in touch</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-moss-600">
+            Get in touch
+          </p>
           <h2 className="mt-3 font-serif text-3xl font-semibold leading-[1.1] tracking-[-0.018em] text-ink md:text-4xl">
             Working on something related?
           </h2>
@@ -15,6 +18,22 @@ export default function ContactBlock() {
             or someone with information that could help — we&rsquo;d like to
             hear from you.
           </p>
+
+          <figure className="mt-8 border border-moss-100 bg-paper">
+            <div className="relative aspect-[3/2] w-full">
+              <Image
+                src="/images/illustration-open-envelope.png"
+                alt="A flat illustration of an open envelope with a letter pulled out and a postage stamp — correspondence."
+                fill
+                sizes="(min-width: 768px) 35vw, 100vw"
+                className="object-cover object-center"
+              />
+            </div>
+            <figcaption className="flex items-center justify-between gap-3 border-t border-moss-100 bg-paper-50 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-ink/65">
+              <span>Plate — Write to us</span>
+              <span>We read everything</span>
+            </figcaption>
+          </figure>
         </header>
 
         <div className="md:col-span-7">
@@ -36,10 +55,15 @@ export default function ContactBlock() {
             />
           </div>
 
-          <p className="mt-7 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/45">
+          <p className="mt-7 inline-flex flex-wrap items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/55">
             <span aria-hidden className="h-1 w-1 rounded-full bg-ink/35" />
-            Placeholder contact &middot; will be updated when the campaign
-            address is finalized
+            <span>Want to verify a source?</span>
+            <Link
+              href="/resources"
+              className="underline decoration-moss-600 decoration-2 underline-offset-4 hover:text-ink"
+            >
+              See Resources &amp; sources
+            </Link>
           </p>
         </div>
       </div>
@@ -63,7 +87,7 @@ function ContactCard({
   external?: boolean;
 }) {
   const className =
-    "group block rounded-2xl border border-ink/10 bg-paper p-6 transition duration-200 ease-editorial hover:-translate-y-0.5 hover:border-ink/25 hover:bg-white hover:shadow-card focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper";
+    "group block border border-paper-300 bg-paper p-6 transition duration-200 ease-editorial hover:border-ink/40 hover:bg-paper-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper";
   const inner = (
     <>
       <p className="eyebrow">{eyebrow}</p>
@@ -71,7 +95,7 @@ function ContactCard({
         {title}
       </p>
       <p className="mt-2 text-[14px] leading-[1.65] text-ink/70">{body}</p>
-      <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-ember transition-all duration-200 group-hover:gap-3">
+      <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-moss-600 transition-all duration-200 group-hover:gap-3 hover:text-moss-700">
         {cta}
         <svg
           aria-hidden

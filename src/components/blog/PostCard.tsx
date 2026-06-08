@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import type { CoverHue, Post } from "@/content/posts";
+import type { Post } from "@/content/posts";
 import { formatPublishedDate } from "@/lib/posts";
 
 type Props = {
@@ -7,88 +8,122 @@ type Props = {
   showDate?: boolean;
 };
 
-const hueClasses: Record<CoverHue, { card: string; cap: string; tag: string }> = {
-  ember: {
-    card: "bg-gradient-to-br from-ember-50/70 via-paper to-paper",
-    cap: "from-ember/15 via-ember/5 to-transparent",
-    tag: "border-ember/30 text-ember",
+// Per-category styling — each category keeps the unified black title bar
+// but carries its own accent color signature (tag, stripes, hover rule)
+const categoryStyle: Record<
+  string,
+  {
+    image: string;
+    coverBg: string;
+    tagBorder: string;
+    tagText: string;
+    stripeBg: string;
+    cornerBg: string;
+  }
+> = {
+  Essay: {
+    image: "/images/illustration-open-book.png",
+    coverBg: "bg-paper",
+    tagBorder: "border-moss-600",
+    tagText: "text-moss-700",
+    stripeBg: "bg-moss-500",
+    cornerBg: "bg-moss-600",
   },
-  ink: {
-    card: "bg-gradient-to-br from-paper-200/55 via-paper to-paper",
-    cap: "from-ink/15 via-ink/5 to-transparent",
-    tag: "border-ink/20 text-ink",
+  Explainer: {
+    image: "/images/illustration-books-glasses.png",
+    coverBg: "bg-paper",
+    tagBorder: "border-clay-600",
+    tagText: "text-clay-700",
+    stripeBg: "bg-clay-500",
+    cornerBg: "bg-clay-600",
   },
-  paper: {
-    card: "bg-paper",
-    cap: "from-ember/10 via-ink/5 to-transparent",
-    tag: "border-ink/15 text-ink",
+  Action: {
+    image: "/images/illustration-megaphone.png",
+    coverBg: "bg-paper",
+    tagBorder: "border-crimson-500",
+    tagText: "text-crimson-600",
+    stripeBg: "bg-crimson-500",
+    cornerBg: "bg-crimson-500",
+  },
+  Timeline: {
+    image: "/images/illustration-sealed-letter.png",
+    coverBg: "bg-paper",
+    tagBorder: "border-ember",
+    tagText: "text-ember-700",
+    stripeBg: "bg-ember",
+    cornerBg: "bg-ember",
   },
 };
 
+const defaultStyle = categoryStyle.Essay;
+
 export default function PostCard({ post, showDate = false }: Props) {
-  const hue = hueClasses[post.coverHue ?? "ink"];
+  const style = categoryStyle[post.category] ?? defaultStyle;
+  // Prefer the per-post illustration when set; fall back to the category plate.
+  const imageSrc = post.image?.src ?? style.image;
+  const imageAlt = post.image?.alt ?? "";
 
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/10 ${hue.card} shadow-card transition duration-200 ease-editorial hover:-translate-y-0.5 hover:border-ink/20 hover:shadow-card-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:ring-offset-paper`}
+      className="group relative flex h-full flex-col overflow-hidden border border-ink bg-paper-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
     >
-      <div
-        aria-hidden
-        className={`relative h-44 w-full overflow-hidden bg-gradient-to-br ${hue.cap}`}
-      >
-        <div
-          className="absolute inset-0 opacity-50"
-          style={{
-            backgroundImage:
-              "radial-gradient(rgba(17,24,43,0.08) 1px, transparent 1px)",
-            backgroundSize: "14px 14px",
-          }}
+      {/* Illustration cover — landscape 3:2 to match source */}
+      <div className={`relative aspect-[3/2] w-full overflow-hidden ${style.coverBg}`}>
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="object-cover object-center transition duration-500 ease-editorial group-hover:scale-[1.04]"
         />
-        <p className="absolute bottom-4 left-5 font-serif text-[3.5rem] font-semibold leading-none tracking-[-0.04em] text-ink/15 transition-transform duration-300 ease-editorial group-hover:translate-x-0.5">
-          {post.category}.
-        </p>
-        <div
+        {/* Top category tag — color signature per category */}
+        <div className="absolute inset-x-0 top-0 flex items-center justify-between gap-3 px-5 py-4 text-[10px] font-semibold uppercase tracking-[0.28em]">
+          <span
+            className={`inline-flex items-center gap-2 border-b-2 pb-1 ${style.tagBorder} ${style.tagText}`}
+          >
+            <span aria-hidden className={`h-1.5 w-1.5 ${style.cornerBg}`} />
+            {post.category}
+          </span>
+          <span className="text-ink/75">Voice4Igbal</span>
+        </div>
+      </div>
+
+      {/* Strong unified title bar — black with category-colored accent stripe */}
+      <div className="relative flex flex-col gap-3 border-t border-ink bg-ink px-5 py-5 text-paper md:px-6 md:py-6">
+        <span
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-ink/10 to-transparent"
+          className={`absolute inset-x-0 top-0 h-[3px] ${style.stripeBg}`}
+        />
+        <h3 className="font-serif text-2xl font-semibold leading-[1.05] tracking-[-0.02em] md:text-[1.625rem]">
+          {post.title}
+        </h3>
+        <span
+          aria-hidden
+          className={`block h-px w-12 ${style.stripeBg} transition-all duration-300 ease-editorial group-hover:w-24`}
         />
       </div>
 
-      <div className="flex flex-1 flex-col p-7">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span
-            className={`inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${hue.tag}`}
-          >
-            {post.category}
-          </span>
-          <span className="text-[11px] text-ink/55">{post.readTime}</span>
+      {/* Meta strip */}
+      <div className="flex flex-1 flex-col px-5 py-5 md:px-6 md:py-6">
+        <div className="flex items-center justify-between gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/55">
+          <span>{post.readTime}</span>
           {showDate && (
-            <>
-              <span aria-hidden className="text-ink/30">
-                &middot;
-              </span>
-              <time
-                dateTime={post.publishedAt}
-                className="text-[11px] text-ink/55"
-              >
-                {formatPublishedDate(post.publishedAt)}
-              </time>
-            </>
+            <time dateTime={post.publishedAt}>
+              {formatPublishedDate(post.publishedAt)}
+            </time>
           )}
         </div>
 
-        <h3 className="mt-5 font-serif text-[1.4rem] font-semibold leading-snug tracking-[-0.015em] text-ink md:text-2xl">
-          {post.title}
-        </h3>
-        <p className="mt-3 text-[15px] leading-[1.65] text-ink/70">
+        <p className="mt-4 text-[14px] leading-[1.65] text-ink/75">
           {post.excerpt}
         </p>
 
-        <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-ember transition-all duration-200 ease-editorial group-hover:gap-3">
+        <span className="mt-5 inline-flex items-center gap-2 pt-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-ink transition-all duration-200 group-hover:gap-3">
           Read article
           <svg
             aria-hidden
-            className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+            className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-1"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

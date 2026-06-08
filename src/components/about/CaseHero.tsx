@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { LAST_UPDATED } from "@/lib/links";
 
@@ -16,35 +17,59 @@ const unclear = [
 export default function CaseHero() {
   return (
     <section className="container-page pt-10 pb-16 md:pt-14 md:pb-20">
-      <div className="max-w-3xl">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="eyebrow">About the case</p>
-          <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/50">
-            <span aria-hidden className="h-1 w-1 rounded-full bg-ember" />
-            Last updated: {LAST_UPDATED}
+      {/* Header — title left, illustration right */}
+      <div className="grid items-end gap-10 md:grid-cols-12 md:gap-14">
+        <div className="md:col-span-7">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-ember">
+              About the case
+            </p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/55">
+              Last updated: {LAST_UPDATED}
+            </p>
+          </div>
+          <h1 className="mt-5 font-serif text-[2.5rem] font-semibold leading-[1.0] tracking-[-0.025em] text-ink sm:text-5xl md:text-[3.75rem] lg:text-[4.5rem]">
+            One person.{" "}
+            <span className="text-ember">A larger principle.</span>
+          </h1>
+          <span aria-hidden className="mt-8 block h-px w-20 bg-ember" />
+          <p className="mt-7 max-w-xl text-[15px] leading-[1.7] text-ink/75 md:text-base">
+            Igbal Abilov is a researcher whose case has become a public test of
+            academic freedom. This page explains who he is, what is currently
+            known about his situation, and why his story matters far beyond his
+            own life.
           </p>
-        </div>
-        <h1 className="mt-4 font-serif text-[2.5rem] font-semibold leading-[1.05] tracking-[-0.022em] text-ink sm:text-5xl md:text-[3.75rem] lg:text-6xl">
-          One person.{" "}
-          <span className="text-ember">A larger principle.</span>
-        </h1>
-        <p className="mt-7 text-lg leading-[1.65] text-ink/75 md:text-xl">
-          Igbal Abilov is a researcher whose case has become a public test of
-          academic freedom. This page explains who he is, what is currently
-          known about his situation, and why his story matters far beyond his
-          own life.
-        </p>
 
-        <div className="mt-9 flex flex-wrap gap-3">
-          <Link href="/take-action" className="btn-primary">
-            Sign the petition
-          </Link>
-          <Link href="/blog" className="btn-secondary">
-            Read the blog
-          </Link>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link href="/take-action" className="btn-primary">
+              Sign the petition
+            </Link>
+            <Link href="/blog" className="btn-secondary">
+              Read the blog
+            </Link>
+          </div>
         </div>
+
+        <aside className="md:col-span-5">
+          <figure className="relative border border-paper-300 bg-paper">
+            <div className="relative aspect-[3/2] w-full">
+              <Image
+                src="/images/illustration-open-book.png"
+                alt="A flat illustration of an open hardbound book with handwritten lines and a fountain pen — the scholar's work."
+                fill
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="object-cover object-center"
+              />
+            </div>
+            <figcaption className="flex items-center justify-between gap-3 border-t border-paper-300 bg-paper-50 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-ink/65">
+              <span>Plate I — His work</span>
+              <span>The record</span>
+            </figcaption>
+          </figure>
+        </aside>
       </div>
 
+      {/* Known / Unclear cards */}
       <div className="mt-14 grid gap-4 md:mt-16 md:grid-cols-2 md:gap-6">
         <KnownCard title="What we know" items={known} variant="known" />
         <KnownCard
@@ -69,18 +94,18 @@ function KnownCard({
   const isKnown = variant === "known";
   return (
     <div
-      className={`group rounded-2xl p-7 transition duration-200 ease-editorial md:p-9 ${
+      className={`group p-7 transition duration-200 ease-editorial md:p-9 ${
         isKnown
-          ? "border border-ink/10 bg-white/70 shadow-card hover:border-ink/20 hover:shadow-card-hover"
-          : "border border-dashed border-ink/25 bg-paper hover:border-ink/40"
+          ? "border border-moss-100 bg-moss-50/60 hover:border-moss-500/50"
+          : "border border-dashed border-clay-500/40 bg-clay-50/40 hover:border-clay-500/70"
       }`}
     >
       <div className="flex items-center gap-3">
         <span
-          className={`grid h-8 w-8 place-items-center rounded-full ${
+          className={`grid h-8 w-8 place-items-center rounded-none border ${
             isKnown
-              ? "bg-ember/12 text-ember"
-              : "bg-ink/[0.06] text-ink/55"
+              ? "border-moss-500 bg-moss-100/60 text-moss-700"
+              : "border-clay-500/60 bg-clay-50 text-clay-700"
           }`}
         >
           {isKnown ? (
@@ -113,7 +138,11 @@ function KnownCard({
             </svg>
           )}
         </span>
-        <p className={`eyebrow ${isKnown ? "text-ember" : "text-ink/55"}`}>
+        <p
+          className={`text-[11px] font-semibold uppercase tracking-[0.22em] ${
+            isKnown ? "text-moss-700" : "text-clay-700"
+          }`}
+        >
           {title}
         </p>
       </div>
@@ -124,7 +153,7 @@ function KnownCard({
             <span
               aria-hidden
               className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${
-                isKnown ? "bg-ember" : "bg-ink/40"
+                isKnown ? "bg-moss-500" : "bg-clay-500"
               }`}
             />
             <span>{item}</span>

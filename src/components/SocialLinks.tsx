@@ -25,13 +25,6 @@ const platforms: Platform[] = [
     Icon: InstagramIcon,
   },
   {
-    key: "tiktok",
-    label: "TikTok",
-    ariaLabel: "Follow us on TikTok",
-    href: SOCIAL_LINKS.tiktok,
-    Icon: TikTokIcon,
-  },
-  {
     key: "x",
     label: "X",
     ariaLabel: "Follow us on X",
@@ -47,8 +40,8 @@ const pillBase =
 
 const variantClasses: Record<Variant, string> = {
   light:
-    "border-ink/15 text-ink/70 hover:border-ember/40 hover:bg-white hover:text-ember focus-visible:ring-ink/30 focus-visible:ring-offset-paper",
-  dark: "border-white/15 text-paper/80 hover:border-ember/60 hover:bg-white/5 hover:text-ember focus-visible:ring-paper/40 focus-visible:ring-offset-ink",
+    "border-ink/20 text-ink/75 hover:border-ink hover:bg-paper-50 hover:text-ink focus-visible:ring-ink/30 focus-visible:ring-offset-paper",
+  dark: "border-paper/25 text-paper/75 hover:border-paper hover:bg-paper/[0.06] hover:text-paper focus-visible:ring-paper/40 focus-visible:ring-offset-ink",
 };
 
 export default function SocialLinks({
@@ -91,19 +84,6 @@ function InstagramIcon({ className }: { className?: string }) {
       fill="currentColor"
     >
       <path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5zm3 15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10zm-8-3a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5-1.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-    </svg>
-  );
-}
-
-function TikTokIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 24 24"
-      className={className}
-      fill="currentColor"
-    >
-      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.83 20.1a6.34 6.34 0 0 0 10.86-4.43V8.87a8.16 8.16 0 0 0 4.77 1.52V6.94a4.85 4.85 0 0 1-1.87-.25z" />
     </svg>
   );
 }

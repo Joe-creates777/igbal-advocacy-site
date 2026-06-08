@@ -46,7 +46,7 @@ export default function CopyButton({ text, ariaLabel }: Props) {
           ? "border-ember bg-ember text-white shadow-glow focus-visible:ring-ember"
           : error
             ? "border-ink/40 bg-paper text-ink/70"
-            : "border-ink/15 bg-paper text-ink hover:-translate-y-px hover:border-ink/35 hover:bg-white focus-visible:ring-ink/40"
+            : "border-ink/15 bg-paper-50 text-ink hover:border-ink/45 hover:bg-paper focus-visible:ring-ink/40"
       }`}
     >
       {copied ? (

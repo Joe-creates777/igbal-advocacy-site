@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type Theme = {
   title: string;
   body: string;
@@ -25,12 +27,14 @@ export default function BroaderConcerns() {
       className="container-page section"
     >
       <div className="max-w-3xl">
-        <p className="eyebrow">A larger pattern</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-moss-600">
+          A larger pattern
+        </p>
         <h2
           id="broader-concerns-heading"
           className="mt-3 font-serif text-[2.5rem] font-semibold leading-[1.05] tracking-[-0.022em] text-ink sm:text-5xl md:text-6xl"
         >
-          This is not <span className="text-ember">just one case.</span>
+          This is not <span className="text-moss-600">just one case.</span>
         </h2>
       </div>
 
@@ -59,14 +63,29 @@ export default function BroaderConcerns() {
         </div>
 
         <aside className="lg:col-span-5">
+          <figure className="mb-6 border border-moss-100 bg-paper">
+            <div className="relative aspect-[3/2] w-full">
+              <Image
+                src="/images/illustration-university.png"
+                alt="A flat illustration of a classical university building with columns and a sage-green pediment — the institution of learning."
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover object-center"
+              />
+            </div>
+            <figcaption className="flex items-center justify-between gap-3 border-t border-moss-100 bg-paper-50 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-ink/65">
+              <span>Plate — The institution</span>
+              <span>What is at stake</span>
+            </figcaption>
+          </figure>
           <p className="eyebrow mb-4">Three concerns at once</p>
           <ul className="grid gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 shadow-card">
             {themes.map((theme, idx) => (
               <li
                 key={theme.title}
-                className="group bg-paper p-6 transition-colors duration-200 hover:bg-white md:p-7"
+                className="group bg-paper-50 p-6 transition-colors duration-200 hover:bg-paper md:p-7"
               >
-                <p className="font-serif text-[11px] font-semibold tracking-[0.32em] text-ember">
+                <p className="font-serif text-[11px] font-semibold tracking-[0.32em] text-moss-600">
                   0{idx + 1}
                 </p>
                 <h3 className="mt-3 font-serif text-lg font-semibold leading-snug tracking-[-0.015em] text-ink md:text-xl">

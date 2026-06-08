@@ -1,18 +1,24 @@
+import Image from "next/image";
+
 type Pillar = {
+  num: string;
   title: string;
   body: string;
 };
 
 const pillars: Pillar[] = [
   {
+    num: "01",
     title: "Academic freedom",
     body: "The right to research, to question, and to publish — without fear of punishment — is the foundation of every university and every functioning democracy.",
   },
   {
+    num: "02",
     title: "Freedom of expression",
     body: "When a researcher is silenced, every reader, student, and citizen loses something. Information is power, but only when it is free to move.",
   },
   {
+    num: "03",
     title: "Human rights",
     body: "Behind the headlines and the case files is a person. Standing with Igbal is standing for the principle that no one should pay for their ideas with their freedom.",
   },
@@ -23,58 +29,68 @@ export default function WhyItMatters() {
     <section
       id="why-it-matters"
       aria-labelledby="why-it-matters-heading"
-      className="border-y border-ink/10 surface-muted"
+      className="relative bg-paper"
     >
-      <div className="container-page section">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <header className="lg:col-span-5">
-            <p className="eyebrow">Why this case matters</p>
+      <div className="grid items-stretch md:grid-cols-12">
+        {/* Illustration panel */}
+        <div className="relative md:col-span-5">
+          <div className="relative aspect-[3/2] w-full bg-moss-100/50 md:absolute md:inset-0 md:aspect-auto">
+            <Image
+              src="/images/illustration-open-book.png"
+              alt="A flat illustration of an open hardbound book with handwritten lines and a fountain pen resting on the right page."
+              fill
+              sizes="(min-width: 768px) 42vw, 100vw"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-x-0 bottom-0 z-10 flex items-center justify-between gap-3 border-t border-moss-100 bg-paper px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-ink/65">
+              <span>Plate III — The work</span>
+              <span>Unfinished</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Typography panel */}
+        <div className="md:col-span-7">
+          <div className="px-6 py-16 md:px-12 md:py-20 lg:px-16 lg:py-24">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-moss-600">
+              Why this case matters
+            </p>
             <h2
               id="why-it-matters-heading"
-              className="mt-3 font-serif text-3xl font-semibold leading-[1.05] tracking-[-0.018em] text-ink md:text-5xl"
+              className="mt-5 font-serif font-semibold leading-[0.98] tracking-[-0.025em] text-ink text-4xl md:text-6xl lg:text-[4.25rem]"
             >
-              One researcher.{" "}
-              <span className="text-ember">Three principles</span> at stake.
+              One researcher.
+              <br />
+              <span className="text-moss-600">Three principles</span> at stake.
             </h2>
-            <p className="mt-6 max-w-md text-base leading-[1.65] text-ink/70 md:text-lg">
+            <span aria-hidden className="mt-8 block h-px w-20 bg-moss-600" />
+            <p className="mt-7 max-w-lg font-serif text-xl leading-[1.4] text-ink md:text-2xl">
               This isn&rsquo;t only about one person. It&rsquo;s about the
               quiet structures — academic, civic, human — that hold open
               societies together.
             </p>
 
-            <figure className="mt-10 max-w-md border-l-2 border-ember pl-5">
-              <blockquote className="font-serif text-xl leading-snug text-ink md:text-[1.5rem]">
-                &ldquo;The strength of a society can be measured by how it
-                treats the people asking it the hardest questions.&rdquo;
-              </blockquote>
-              <figcaption className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/55">
-                Campaign principle
-              </figcaption>
-            </figure>
-          </header>
-
-          <ul className="lg:col-span-7 grid gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 shadow-card">
-            {pillars.map((pillar, idx) => (
-              <li
-                key={pillar.title}
-                className="group flex flex-col gap-3 bg-paper p-8 transition-colors duration-200 hover:bg-white md:flex-row md:gap-10 md:p-10"
-              >
-                <div className="md:w-32 md:shrink-0">
-                  <p className="font-serif text-3xl font-semibold tracking-[-0.02em] text-ember md:text-4xl">
-                    0{idx + 1}
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-serif text-2xl font-semibold leading-snug tracking-[-0.015em] text-ink md:text-[1.65rem]">
-                    {pillar.title}
-                  </h3>
-                  <p className="mt-3 max-w-xl text-[15px] leading-[1.65] text-ink/70 md:text-base">
-                    {pillar.body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+            <ol className="mt-12 divide-y divide-paper-300 border-y border-paper-300">
+              {pillars.map((pillar) => (
+                <li
+                  key={pillar.num}
+                  className="grid gap-4 py-7 md:grid-cols-[4rem_1fr] md:gap-6 md:py-8"
+                >
+                  <span className="font-serif text-[2rem] font-semibold leading-none text-moss-600 md:text-[2.25rem]">
+                    {pillar.num}
+                  </span>
+                  <div>
+                    <h3 className="font-serif text-2xl font-semibold leading-snug tracking-[-0.015em] text-ink md:text-[1.75rem]">
+                      {pillar.title}
+                    </h3>
+                    <p className="mt-3 max-w-xl text-[15px] leading-[1.7] text-ink/75">
+                      {pillar.body}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </section>

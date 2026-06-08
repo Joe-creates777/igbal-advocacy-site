@@ -10,8 +10,19 @@
 export const PETITION_URL =
   "https://www.change.org/p/stop-the-unjust-persecution-of-ethnographer-igbal-abilov";
 
-/** Placeholder — replace with the campaign's shared inbox once finalized. */
-export const CONTACT_EMAIL = "campaign@example.org";
+/** Action Network letter to Senator Schiff supporting Igbal's release. */
+export const SENATOR_LETTER_URL =
+  "https://actionnetwork.org/letters/letter-to-senator-schiff-asking-for-his-support-in-freeing-igbal-abilov?source=direct_link";
+
+/** Scholars at Risk public advocacy action page for Igbal Abilov. */
+export const SCHOLARS_AT_RISK_URL =
+  "https://www.scholarsatrisk.org/actions/igbal-abilov-azerbaijan/#Igbal%20Abilov";
+
+/** Campaign Linktree — all sharable resources in one place. */
+export const LINKTREE_URL = "https://linktr.ee/freeigbalabilov";
+
+/** Campaign shared inbox. */
+export const CONTACT_EMAIL = "voice4igbal@gmail.com";
 
 /**
  * Placeholder — replace with the production domain once the site is live.
@@ -30,7 +41,6 @@ export const HASHTAGS = [
  */
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/Voice4Igbal_26",
-  tiktok: "https://www.tiktok.com/@Voice4Igbal_26",
   x: "https://x.com/Voice4Igbal_26",
 } as const;
 

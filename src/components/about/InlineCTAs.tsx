@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 type CTA = {
@@ -6,6 +7,9 @@ type CTA = {
   body: string;
   cta: { href: string; label: string };
   variant: "soft" | "strong";
+  eyebrowColor: string;
+  stripeColor: string;
+  illustration: { src: string; alt: string; caption: string };
 };
 
 const ctas: CTA[] = [
@@ -15,6 +19,13 @@ const ctas: CTA[] = [
     body: "Short, careful essays connecting Igbal’s case to the wider conversation about academic freedom.",
     cta: { href: "/blog", label: "Browse articles" },
     variant: "soft",
+    eyebrowColor: "text-moss-600",
+    stripeColor: "bg-moss-500",
+    illustration: {
+      src: "/images/illustration-newspapers.png",
+      alt: "A flat illustration of a tied stack of folded newspapers.",
+      caption: "Stories from the campaign",
+    },
   },
   {
     eyebrow: "Take action",
@@ -22,6 +33,13 @@ const ctas: CTA[] = [
     body: "Add your name. Pressure is built one signature, one share, one conversation at a time.",
     cta: { href: "/take-action", label: "Sign now" },
     variant: "strong",
+    eyebrowColor: "text-crimson-100",
+    stripeColor: "bg-crimson-500",
+    illustration: {
+      src: "/images/illustration-raised-hand.png",
+      alt: "A flat illustration of a hand raising a sheet of paper upward.",
+      caption: "Add your voice",
+    },
   },
 ];
 
@@ -35,26 +53,50 @@ export default function InlineCTAs() {
             <li key={item.title}>
               <Link
                 href={item.cta.href}
-                className={`group relative flex h-full flex-col overflow-hidden rounded-3xl p-8 shadow-card transition duration-300 ease-editorial hover:-translate-y-0.5 hover:shadow-card-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 md:p-10 ${
+                className={`group relative flex h-full flex-col overflow-hidden border transition duration-300 ease-editorial focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                   strong
-                    ? "bg-ink text-paper hover:bg-ink-600 focus-visible:ring-ember focus-visible:ring-offset-paper"
-                    : "border border-ink/10 bg-white/70 text-ink hover:border-ink/20 hover:bg-white focus-visible:ring-ink/30 focus-visible:ring-offset-paper"
+                    ? "border-ink bg-ink text-paper hover:bg-ink-600 focus-visible:ring-ink/40 focus-visible:ring-offset-paper"
+                    : "border-paper-300 bg-paper-50 text-ink hover:border-ink/40 focus-visible:ring-ink/30 focus-visible:ring-offset-paper"
                 }`}
               >
-                {strong && (
-                  <>
-                    <div
-                      aria-hidden
-                      className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-ember/30 blur-3xl"
+                <figure
+                  className={`relative ${
+                    strong
+                      ? "border-b border-paper/15 bg-paper"
+                      : "border-b border-paper-300 bg-paper"
+                  }`}
+                >
+                  <span
+                    aria-hidden
+                    className={`absolute inset-x-0 top-0 z-10 h-[3px] ${item.stripeColor}`}
+                  />
+                  <div className="relative aspect-[16/7] w-full overflow-hidden">
+                    <Image
+                      src={item.illustration.src}
+                      alt={item.illustration.alt}
+                      fill
+                      sizes="(min-width: 768px) 45vw, 100vw"
+                      className="object-cover object-center transition duration-500 ease-editorial group-hover:scale-[1.02]"
                     />
-                    <div
-                      aria-hidden
-                      className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                    />
-                  </>
-                )}
-                <div className="relative flex flex-1 flex-col">
-                  <p className="eyebrow text-ember">{item.eyebrow}</p>
+                  </div>
+                  <figcaption
+                    className={`flex items-center justify-between gap-3 px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] ${
+                      strong
+                        ? "border-t border-paper-300 bg-paper-50 text-ink/65"
+                        : "bg-paper text-ink/55"
+                    }`}
+                  >
+                    <span>Plate — {item.eyebrow}</span>
+                    <span>{item.illustration.caption}</span>
+                  </figcaption>
+                </figure>
+
+                <div className="relative flex flex-1 flex-col p-8 md:p-10">
+                  <p
+                    className={`text-[11px] font-semibold uppercase tracking-[0.28em] ${item.eyebrowColor}`}
+                  >
+                    {item.eyebrow}
+                  </p>
                   <h3
                     className={`mt-3 font-serif text-3xl font-semibold leading-[1.1] tracking-[-0.02em] md:text-[2.25rem] ${
                       strong ? "text-paper" : "text-ink"
@@ -70,7 +112,11 @@ export default function InlineCTAs() {
                     {item.body}
                   </p>
 
-                  <span className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-ember transition-all duration-200 group-hover:gap-3">
+                  <span
+                    className={`mt-auto inline-flex items-center gap-2 pt-8 text-[12px] font-semibold uppercase tracking-[0.22em] transition-all duration-200 group-hover:gap-3 ${
+                      strong ? "text-paper" : "text-ink"
+                    }`}
+                  >
                     {item.cta.label}
                     <svg
                       aria-hidden

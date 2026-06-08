@@ -1,117 +1,104 @@
+import Image from "next/image";
 import Link from "next/link";
+
+const steps = [
+  {
+    num: "01",
+    title: "Sign",
+    body: "Add your name to the public petition. It only takes a minute.",
+  },
+  {
+    num: "02",
+    title: "Share",
+    body: "Send the campaign to one classmate, one colleague, one friend.",
+  },
+  {
+    num: "03",
+    title: "Stay informed",
+    body: "Read the blog. Watch the timeline. Keep the spotlight on.",
+  },
+];
 
 export default function FinalCTA() {
   return (
     <section
       id="take-action"
       aria-labelledby="final-cta-heading"
-      className="container-page section"
+      className="relative overflow-hidden bg-ink text-paper"
     >
-      <div className="relative overflow-hidden rounded-3xl bg-ink text-paper shadow-card-hover">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "radial-gradient(rgba(255,255,255,1) 1px, transparent 1px)",
-            backgroundSize: "18px 18px",
-          }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-ember/30 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-ember/15 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-        />
-
-        <div className="relative grid gap-10 p-10 md:grid-cols-12 md:gap-12 md:p-16 lg:p-20">
+      <div className="container-page relative z-10 section">
+        <div className="grid items-center gap-14 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-7">
-            <p className="eyebrow text-ember">Take action now</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-crimson-100">
+              Awareness should lead to action
+            </p>
             <h2
               id="final-cta-heading"
-              className="mt-4 font-serif text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-paper md:text-6xl"
+              className="mt-5 font-serif font-semibold leading-[0.95] tracking-[-0.03em] text-paper text-5xl md:text-7xl lg:text-[6rem]"
             >
-              Don&rsquo;t scroll past.
+              Don&rsquo;t
+              <br />
+              scroll <span className="text-crimson-100">past.</span>
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-[1.65] text-paper/75 md:text-lg">
-              Three minutes can join your name to thousands. Pressure is built
-              one signature, one share, one conversation at a time. Igbal needs
-              all three.
+            <span aria-hidden className="mt-8 block h-px w-20 bg-crimson-100" />
+            <p className="mt-8 max-w-xl font-serif text-xl leading-[1.4] text-paper md:text-2xl">
+              Your voice can help bring Dr. Igbal Abilov home.
+            </p>
+            <p className="mt-5 max-w-xl text-[15px] leading-[1.7] text-paper/75 md:text-base">
+              Three minutes can add your name to the public record. Pressure is
+              built one signature, one share, one conversation at a time.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-3">
               <Link
                 href="/take-action"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-ember px-6 py-3 text-sm font-semibold text-white shadow-sm transition duration-200 ease-out hover:-translate-y-px hover:bg-ember-600 hover:shadow-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                className="inline-flex items-center justify-center gap-2 border border-paper bg-paper px-6 py-3 text-[13px] font-semibold uppercase tracking-[0.18em] text-ink transition duration-200 ease-out hover:bg-paper-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-paper/40 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 Sign the petition
-                <svg
-                  aria-hidden
-                  className="h-4 w-4"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.25"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
               </Link>
-              <Link href="/take-action" className="btn-on-dark">
+              <Link href="/take-action#share" className="btn-on-dark">
                 Share the campaign
               </Link>
             </div>
+
+            <ol className="mt-12 divide-y divide-paper/15 border-y border-paper/15">
+              {steps.map((step) => (
+                <li
+                  key={step.num}
+                  className="grid grid-cols-[3rem_1fr] gap-4 py-6"
+                >
+                  <span className="font-serif text-[1.75rem] font-semibold leading-none text-crimson-100">
+                    {step.num}
+                  </span>
+                  <div>
+                    <p className="text-[12px] font-semibold uppercase tracking-[0.24em] text-paper">
+                      {step.title}
+                    </p>
+                    <p className="mt-2 text-[14px] leading-[1.7] text-paper/75">
+                      {step.body}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
 
           <aside className="md:col-span-5">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur">
-              <p className="eyebrow text-ember">Three ways to help</p>
-              <ul className="mt-5 space-y-5 text-sm text-paper/85">
-                <li className="flex gap-4">
-                  <span className="font-serif text-2xl font-semibold leading-none text-ember">
-                    1
-                  </span>
-                  <div>
-                    <p className="font-semibold text-paper">Sign</p>
-                    <p className="mt-1 text-paper/70">
-                      Add your name to the public petition. It only takes a
-                      minute.
-                    </p>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <span className="font-serif text-2xl font-semibold leading-none text-ember">
-                    2
-                  </span>
-                  <div>
-                    <p className="font-semibold text-paper">Share</p>
-                    <p className="mt-1 text-paper/70">
-                      Send the campaign to one classmate, one colleague, one
-                      friend.
-                    </p>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <span className="font-serif text-2xl font-semibold leading-none text-ember">
-                    3
-                  </span>
-                  <div>
-                    <p className="font-semibold text-paper">Stay informed</p>
-                    <p className="mt-1 text-paper/70">
-                      Read the blog. Watch the timeline. Keep the spotlight on.
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
+            <figure className="relative border border-paper/15 bg-paper">
+              <div className="relative aspect-[3/2] w-full">
+                <Image
+                  src="/images/illustration-raised-hand.png"
+                  alt="A flat illustration of a hand raising a sheet of paper — a petition — upward."
+                  fill
+                  sizes="(min-width: 768px) 40vw, 100vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <figcaption className="flex items-center justify-between gap-3 border-t border-ink/15 bg-paper-50 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-ink/65">
+                <span>Plate V — Your voice</span>
+                <span>Raise it</span>
+              </figcaption>
+            </figure>
           </aside>
         </div>
       </div>
